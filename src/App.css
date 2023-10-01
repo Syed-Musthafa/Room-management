@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+}
+::-webkit-scrollbar{
+  display: none;
+}
+
+.tableHead {
+  background-color: #BEFFF7;
+  height: 50px;
+  position: sticky;
+  top: 0;
+ 
+  z-index: 5;
+}
