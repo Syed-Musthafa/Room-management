@@ -17,6 +17,7 @@ import CustomDropdown from "../../../../components/DropDown";
 import EditableText from "../../../../components/EditableText";
 import ServiceEdit from "../../../../components/ServiceEdit";
 import { AmentiesContextProv } from "../../../../context/AmentiesContext";
+import IconHolder from "../../../../components/IconButton";
 
 const Gold = () => {
   const contextData = useContext(AmentiesContextProv);
@@ -256,6 +257,17 @@ const Gold = () => {
 
   }
 
+  const handleDelete = useCallback((id) => {
+
+    setGoldData((prevBronzeData) => {
+      const updatedBronzeData = prevBronzeData.filter((item) => item.bronzeId !== id);
+      return updatedBronzeData;
+    });
+      
+
+  },[goldData])
+
+
 
 
 
@@ -268,6 +280,7 @@ const Gold = () => {
     { label: "Retails Long Stay", allowedUser: true, checked: true },
     { label: "Corporate Long Stay", allowedUser: true, checked: true },
     { label: "Corporate Long stay", allowedUser: true, checked: true },
+    {label: "", allowedUser: true, checked: false}
   ];
 
   const tableBodyContent = useCallback(() => {
@@ -378,6 +391,28 @@ const Gold = () => {
                       // checked={selected.includes(item.bronzeId)}
                       // onClick={handleClick(item.bronzeId)}
                     />
+                  </TableCell>
+                  <TableCell>
+                    {
+                      goldData.length !== 1 && (
+                        <Button
+                        variant="text"
+                        sx={{ borderRadius: "5px", px: "5px" }}
+                        onClick={()=>handleDelete(item.bronzeId)}
+                      >
+                        <IconHolder
+                          icon="delete"
+                          sx={{
+                            "& .tab-iconBox": {
+                              height: "24px",
+                              width: "auto !important",
+                            },
+                          }}
+                        />
+                      </Button>
+                      )
+                    }
+               
                   </TableCell>
                 </TableRow>
               </>

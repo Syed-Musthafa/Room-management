@@ -16,14 +16,13 @@ import CustomDropdown from "../../../../components/DropDown";
 import PaperBase from "../../../../layout/PaperBase";
 import TableAction from "../../../../layout/TableAction";
 import TableList from "../../../../components/Table";
-
+import IconHolder from "../../../../components/IconButton";
 
 const Bronze = () => {
   const contextData = useContext(AmentiesContextProv);
-  const { bronzeData , setBronzeData, isAllCheck } = contextData;
+  const { bronzeData, setBronzeData, isAllCheck } = contextData;
 
   console.log("bronzeData", bronzeData);
-
 
   const [newOption, setNewOption] = useState("");
   const [isAddingOption, setIsAddingOption] = useState(false);
@@ -44,63 +43,63 @@ const Bronze = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isServiceEdit, setIsServiceEdit] = useState(false);
   // const [text, setText] = useState("0");
-  
 
   const Type = [
     { id: "0", value: "Dollar" },
     { id: "1", value: "Percentage" },
   ];
 
+  const handleDoubleServiceClick = useCallback(
+    (index) => {
+      const updatedData = [...bronzeData];
+      updatedData[index].serviceEdit = true;
+      setBronzeData(updatedData);
 
-  const handleDoubleServiceClick = useCallback((index) => {
+      setIsServiceEdit(true);
+    },
+    [isServiceEdit, bronzeData]
+  );
 
-    const updatedData = [...bronzeData];
-    updatedData[index].serviceEdit = true
-    setBronzeData(updatedData);
-    
-    setIsServiceEdit(true);
-  }, [isServiceEdit, bronzeData ]);
+  const handleDoubleClick = useCallback(
+    (id) => {
+      setIsEditing(true);
+    },
+    [isEditing]
+  );
 
-  const handleDoubleClick = useCallback((id) => {
-    setIsEditing(true);
+  const handleSaveServie = useCallback(
+    (index) => (e) => {
+      const updatedData = [...bronzeData];
+      setBronzeData(updatedData);
+      setIsServiceEdit(false);
+    },
+    [isServiceEdit, bronzeData]
+  );
 
-  }, [isEditing]);
+  const handleSave = useCallback(
+    (index) => (e) => {
+      const updatedData = [...bronzeData];
+      // Update the data in updatedData[index] as needed
+      setBronzeData(updatedData);
+      setIsEditing(false);
+    },
+    [isEditing, bronzeData]
+  );
 
-  const handleSaveServie = useCallback((index) => (e) => {
-    
-    const updatedData = [...bronzeData];
-    setBronzeData(updatedData);
-    setIsServiceEdit(false);
-    
-  }, [isServiceEdit, bronzeData]);
+  const handleServiceEditChange = useCallback(
+    (index) => (e) => {
+      const updatedData = [...bronzeData];
+      updatedData[index].service = e.target.value;
+      setBronzeData(updatedData);
+    },
+    [bronzeData]
+  );
 
-  const handleSave = useCallback((index) => (e) => {
-    
-    const updatedData = [...bronzeData];
-    // Update the data in updatedData[index] as needed
-    setBronzeData(updatedData);
-    setIsEditing(false);
-    
-  }, [isEditing, bronzeData]);
-
-  const handleServiceEditChange = useCallback((index)=>
-  (e) => {
-
-    const updatedData = [...bronzeData];
-    updatedData[index].service = e.target.value;
-    setBronzeData(updatedData);
-  
-  },
-  [bronzeData]
-);
-
-  const handleEditChange = useCallback((index)=>
-    (e) => {
-
+  const handleEditChange = useCallback(
+    (index) => (e) => {
       const updatedData = [...bronzeData];
       updatedData[index].rate = e.target.value;
       setBronzeData(updatedData);
-    
     },
     [bronzeData]
   );
@@ -159,7 +158,7 @@ const Bronze = () => {
     (index) => (e) => {
       const updatedData = [...bronzeData];
       const updatedNewOption = e?.target?.value;
-      updatedData[index].frequency = updatedNewOption
+      updatedData[index].frequency = updatedNewOption;
       setBronzeData(updatedData);
       setNewOption(e?.target?.value);
     },
@@ -170,7 +169,7 @@ const Bronze = () => {
     (name, index) => (e) => {
       const updatedData = [...bronzeData];
       if (name === "retails_short") {
-        updatedData[index].retails_short = e.target.checked || isAllCheck ;
+        updatedData[index].retails_short = e.target.checked || isAllCheck;
       } else if (name === "retails_long") {
         updatedData[index].retails_long = e.target.checked;
       } else if (name === "corporate_short") {
@@ -189,16 +188,15 @@ const Bronze = () => {
 
       const updatedCheckboxes = bronzeData.map((checkbox) => ({
         ...checkbox,
-        retails_short: !isSelected ,
+        retails_short: !isSelected,
       }));
 
       setBronzeData(updatedCheckboxes);
       setMasterCheckBox(checked);
 
       setIsSelected(!isSelected);
-   
     },
-    [masterCheckBox, bronzeData, isSelected, ]
+    [masterCheckBox, bronzeData, isSelected]
   );
 
   const handleRetailLongClick = useCallback(
@@ -213,9 +211,8 @@ const Bronze = () => {
       setBronzeData(updatedCheckboxes);
       setRetailLongCheckBox(checked);
       setRetailLongSelected(!retailLongSelected);
-   
     },
-    [retailLongCheckBox, bronzeData, retailLongSelected, ]
+    [retailLongCheckBox, bronzeData, retailLongSelected]
   );
 
   const handleCorporateShortClick = useCallback(
@@ -230,11 +227,9 @@ const Bronze = () => {
       setBronzeData(updatedCheckboxes);
       setCorporateShortBox(checked);
       setCorporateShortSelected(!corporateShortSelected);
-   
     },
     [corporateShortBox, bronzeData, corporateShortSelected]
   );
-
 
   const handleCorporateLongClick = useCallback(
     (event) => {
@@ -248,9 +243,8 @@ const Bronze = () => {
       setBronzeData(updatedCheckboxes);
       setCorporateLongBox(checked);
       setCorporateLongSelected(!corporateLongSelected);
-     
     },
-    [corporateLongBox, bronzeData, corporateLongSelected, ]
+    [corporateLongBox, bronzeData, corporateLongSelected]
   );
 
   const handleAllCheckBox = () => {
@@ -258,11 +252,18 @@ const Bronze = () => {
     handleRetailLongClick();
     handleCorporateShortClick();
     handleCorporateLongClick();
-
-  }
-
+  };
 
 
+  const handleDelete = useCallback((id) => {
+
+    setBronzeData((prevBronzeData) => {
+      const updatedBronzeData = prevBronzeData.filter((item) => item.bronzeId !== id);
+      return updatedBronzeData;
+    });
+      
+
+  },[bronzeData])
 
   const tableHeaders = [
     { label: "Services", allowedUser: true, checked: false },
@@ -273,6 +274,7 @@ const Bronze = () => {
     { label: "Retails Long Stay", allowedUser: true, checked: true },
     { label: "Corporate Long Stay", allowedUser: true, checked: true },
     { label: "Corporate Long stay", allowedUser: true, checked: true },
+    {label: "", allowedUser: true, checked: false}
   ];
 
   const tableBodyContent = useCallback(() => {
@@ -288,13 +290,12 @@ const Bronze = () => {
                 <TableRow>
                   <TableCell>
                     <ServiceEdit
-                    isEditing={isServiceEdit}
-                    value={item.service}
-                    onDoubleClick={() => handleDoubleServiceClick(index)}
-                    onChange={handleServiceEditChange(index)}
-                    onClick={handleSaveServie(index)}
-                    serviceEdit={item.serviceEdit}
-                  
+                      isEditing={isServiceEdit}
+                      value={item.service}
+                      onDoubleClick={() => handleDoubleServiceClick(index)}
+                      onChange={handleServiceEditChange(index)}
+                      onClick={handleSaveServie(index)}
+                      serviceEdit={item.serviceEdit}
                     />
                   </TableCell>
 
@@ -324,13 +325,13 @@ const Bronze = () => {
                     />
                   </TableCell>
                   <TableCell>
-                    <EditableText 
-                     isEditing={isEditing}
-                     value={item.rate}
-                     onChange={handleEditChange(index)}
-                     onDoubleClick={handleDoubleClick}
-                     onClick={ handleSave(index)}
-                      />
+                    <EditableText
+                      isEditing={isEditing}
+                      value={item.rate}
+                      onChange={handleEditChange(index)}
+                      onDoubleClick={handleDoubleClick}
+                      onClick={handleSave(index)}
+                    />
                   </TableCell>
                   <TableCell>
                     <Checkbox
@@ -385,22 +386,35 @@ const Bronze = () => {
                       // onClick={handleClick(item.bronzeId)}
                     />
                   </TableCell>
+                  <TableCell>
+                    {
+                      bronzeData.length !== 1 && (
+                        <Button
+                        variant="text"
+                        sx={{ borderRadius: "5px", px: "5px" }}
+                        onClick={()=>handleDelete(item.bronzeId)}
+                      >
+                        <IconHolder
+                          icon="delete"
+                          sx={{
+                            "& .tab-iconBox": {
+                              height: "24px",
+                              width: "auto !important",
+                            },
+                          }}
+                        />
+                      </Button>
+                      )
+                    }
+               
+                  </TableCell>
                 </TableRow>
               </>
             );
           })}
       </>
     );
-  }, [
-    bronzeData,
-    newOption,
-    isAddingOption,
-
-    isEditing,
-    isServiceEdit
-
-    ,
-  ]);
+  }, [bronzeData, newOption, isAddingOption, isEditing, isServiceEdit]);
 
   return (
     <>
@@ -422,7 +436,6 @@ const Bronze = () => {
           isRetailLong={retailLongCheckBox}
           isCorporateShort={corporateShortBox}
           isCorporateLong={corporateLongBox}
-        
           TableBodyContent={tableBodyContent}
           tableHeaders={tableHeaders}
           onRetailShortClick={handleSelectAllClick}

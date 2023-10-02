@@ -19,6 +19,7 @@ import CustomDropdown from "../../../../components/DropDown";
 import EditableText from "../../../../components/EditableText";
 import { ServiceContextProv } from "../../../../context/ServiceContext";
 import ServiceEdit from "../../../../components/ServiceEdit";
+import IconHolder from "../../../../components/IconButton";
 
 const Platinum = () => {
   const contextData = useContext(ServiceContextProv);
@@ -258,6 +259,18 @@ const Platinum = () => {
 
   }
 
+  
+  const handleDelete = useCallback((id) => {
+
+    setPlatinumData((prevBronzeData) => {
+      const updatedBronzeData = prevBronzeData.filter((item) => item.bronzeId !== id);
+      return updatedBronzeData;
+    });
+      
+
+  },[platinumData])
+
+
 
 
 
@@ -270,6 +283,7 @@ const Platinum = () => {
     { label: "Retails Long Stay", allowedUser: true, checked: true },
     { label: "Corporate Long Stay", allowedUser: true, checked: true },
     { label: "Corporate Long stay", allowedUser: true, checked: true },
+    {label: "", allowedUser: true, checked: false}
   ];
 
   const tableBodyContent = useCallback(() => {
@@ -380,6 +394,28 @@ const Platinum = () => {
                       // checked={selected.includes(item.bronzeId)}
                       // onClick={handleClick(item.bronzeId)}
                     />
+                  </TableCell>
+                  <TableCell>
+                    {
+                      platinumData.length !== 1 && (
+                        <Button
+                        variant="text"
+                        sx={{ borderRadius: "5px", px: "5px" }}
+                        onClick={()=>handleDelete(item.bronzeId)}
+                      >
+                        <IconHolder
+                          icon="delete"
+                          sx={{
+                            "& .tab-iconBox": {
+                              height: "24px",
+                              width: "auto !important",
+                            },
+                          }}
+                        />
+                      </Button>
+                      )
+                    }
+               
                   </TableCell>
                 </TableRow>
               </>
