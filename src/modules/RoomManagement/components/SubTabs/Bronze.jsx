@@ -43,7 +43,7 @@ const Bronze = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [isServiceEdit, setIsServiceEdit] = useState(false);
-  // const [text, setText] = useState("0");
+  const [enabledIndex, setEnabledIndex] = useState(0);
   
 
   const Type = [
@@ -66,7 +66,7 @@ const Bronze = () => {
 
   }, [isEditing]);
 
-  const handleSaveServie = useCallback((index) => (e) => {
+  const handleSaveService = useCallback((index) => (e) => {
     
     const updatedData = [...bronzeData];
     setBronzeData(updatedData);
@@ -86,6 +86,9 @@ const Bronze = () => {
   const handleServiceEditChange = useCallback((index)=>
   (e) => {
 
+    console.log("index", index);
+    console.log("chneged", e);
+
     const updatedData = [...bronzeData];
     updatedData[index].service = e.target.value;
     setBronzeData(updatedData);
@@ -93,6 +96,11 @@ const Bronze = () => {
   },
   [bronzeData]
 );
+
+const enableTextField = useCallback((index) => {
+  setEnabledIndex(index);
+},[enabledIndex])
+
 
   const handleEditChange = useCallback((index)=>
     (e) => {
@@ -155,7 +163,7 @@ const Bronze = () => {
     [bronzeData, isAddingOption]
   );
 
-  const handleTextchange = useCallback(
+  const handleTextChange = useCallback(
     (index) => (e) => {
       const updatedData = [...bronzeData];
       const updatedNewOption = e?.target?.value;
@@ -184,6 +192,29 @@ const Bronze = () => {
   );
 
   const handleSelectAllClick = useCallback(
+    (event) => {
+      const { checked } = event.target;
+
+      console.log("worked");
+
+      const updatedCheckboxes = bronzeData.map((checkbox) => ({
+        ...checkbox,
+        retails_short: true ,
+        retails_long : true,
+        corporate_short : true,
+        corporate_long : true
+      }));
+
+      setBronzeData(updatedCheckboxes);
+      // setMasterCheckBox(checked);
+
+      // setIsSelected(!isSelected);
+   
+    },
+    [masterCheckBox, bronzeData, isSelected, ]
+  );
+
+  const handleRetailShortClick = useCallback(
     (event) => {
       const { checked } = event.target;
 
@@ -253,13 +284,13 @@ const Bronze = () => {
     [corporateLongBox, bronzeData, corporateLongSelected, ]
   );
 
-  const handleAllCheckBox = () => {
-    handleSelectAllClick();
-    handleRetailLongClick();
-    handleCorporateShortClick();
-    handleCorporateLongClick();
+  // const handleAllCheckBox = () => {
+  //   handleSelectAllClick();
+  //   handleRetailLongClick();
+  //   handleCorporateShortClick();
+  //   handleCorporateLongClick();
 
-  }
+  // }
 
   const handleDelete = useCallback((id) => {
 
@@ -303,8 +334,9 @@ const Bronze = () => {
                     value={item.service}
                     onDoubleClick={() => handleDoubleServiceClick(index)}
                     onChange={handleServiceEditChange(index)}
-                    onClick={handleSaveServie(index)}
-                    serviceEdit={item.serviceEdit}
+                    onClick={handleSaveService(index)}
+                    disabled={index !== enabledIndex}
+                    onFocus={enableTextField(index)}
                   
                     />
                   </TableCell>
@@ -317,7 +349,7 @@ const Bronze = () => {
                       addButton={handleAddChange(index)}
                       saveButton={handleEnter(index)}
                       newOption={newOption}
-                      handleText={handleTextchange(index)}
+                      handleText={handleTextChange(index)}
                       isAddingOption={isAddingOption}
                       disableUnderline={true}
                       edit={item.edit}
@@ -459,11 +491,12 @@ const Bronze = () => {
         
           TableBodyContent={tableBodyContent}
           tableHeaders={tableHeaders}
-          onRetailShortClick={handleSelectAllClick}
+          // omSelectAllCheck={handleSelectAllClick}
+          onRetailShortClick={handleRetailShortClick}
           onRetailLongClick={handleRetailLongClick}
           onCorporateShortClick={handleCorporateShortClick}
           onCorporateLongClick={handleCorporateLongClick}
-          onAllCheckClick={handleAllCheckBox}
+          onAllCheckClick={handleSelectAllClick}
         />
       </PaperBase>
     </>

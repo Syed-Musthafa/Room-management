@@ -11,9 +11,12 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useCallback, useContext } from "react";
 import "../App.css";
 import { ServiceContextProv } from "../context/ServiceContext";
+import { AmentiesContextProv } from "../context/AmentiesContext";
+import { RoomContextProv } from "../context/RoomContext";
+import { useEffect } from "react";
 
 const TableList = ({
   allowAction,
@@ -25,7 +28,7 @@ const TableList = ({
   rowCount,
   numSelected,
   tableHeaders,
-  onSelectAllClick,
+
   TableBodyContent,
   allCheckName,
   isRetailShort,
@@ -40,13 +43,32 @@ const TableList = ({
 }) => {
 
 
-  console.log("allCheckName", allCheckName);
+  const roomContextData = useContext(RoomContextProv);
+  const { value } = roomContextData;
+
+  console.log("value", value);
+
+
+
+    const AmentiasContextData = useContext(AmentiesContextProv);
+       const { isAllCheck, } = AmentiasContextData;
+  
+      const contextData = useContext(ServiceContextProv);
+      const { isAllCheck : allCheck, } = contextData;
+    
+ 
+
 
   
-  const contextData = useContext(ServiceContextProv);
-  const { isAllCheck  } = contextData;
+ 
+  
+
+
+
+  console.log("isAllCheck", isAllCheck);
 
   return (
+
 
 
     <Fragment>
@@ -128,14 +150,23 @@ const TableList = ({
                                 <Checkbox
                                   sx={{ padding: 0 }}
                                   checked={
-                                    !isAllCheck ? (
+                                    value ? (!isAllCheck ? (
                                     th.label === "Retails Short Stay" 
                                     ?  isRetailShort
                                     : th.label === "Retails Long Stay" 
                                     ? isRetailLong 
                                     : th.label === "Corporate Long Stay"
                                     ? isCorporateShort 
-                                    : isCorporateLong ) : true
+                                    : isCorporateLong ) : true) : (
+                                      !allCheck ? (
+                                        th.label === "Retails Short Stay" 
+                                        ?  isRetailShort
+                                        : th.label === "Retails Long Stay" 
+                                        ? isRetailLong 
+                                        : th.label === "Corporate Long Stay"
+                                        ? isCorporateShort 
+                                        : isCorporateLong ) : true
+                                    )
                                   }
                                   color="primary"
                                   indeterminate={
@@ -148,14 +179,14 @@ const TableList = ({
                                     "aria-label": "select all Fields",
                                   }}
                                   onChange={
-                                    !isAllCheck ? (
+                               (
                                     th.label === "Retails Short Stay" 
                                     ?  onRetailShortClick
                                     : th.label === "Retails Long Stay" 
                                     ? onRetailLongClick 
                                     : th.label === "Corporate Long Stay"
                                     ? onCorporateShortClick 
-                                    : onCorporateLongClick) : onAllCheckClick 
+                                    : onCorporateLongClick)  
                                     }
                                 />
                                 <Typography

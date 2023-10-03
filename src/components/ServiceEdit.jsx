@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { ServiceContextProv } from "../context/ServiceContext";
 import IconHolder from "./IconButton";
 
-function ServiceEdit({ isEditing, value , onDoubleClick, onChange, onClick, ServiceEdit }) {
+function ServiceEdit({ isEditing, value , onDoubleClick, onChange, onClick, disabled, onFocus }) {
  
 
 
@@ -28,6 +28,8 @@ function ServiceEdit({ isEditing, value , onDoubleClick, onChange, onClick, Serv
             variant="text"
             sx={{ borderRadius: "5px", px: "5px" }}
             onClick={onClick}
+            disabled={disabled}
+            onFocus={onFocus}
           >
             <IconHolder
               icon="right"

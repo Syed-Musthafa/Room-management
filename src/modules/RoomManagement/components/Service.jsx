@@ -102,7 +102,7 @@ const Service = (props) => {
                     inputProps={{
                       "aria-label": "select all Fields",
                     }}
-                    // onChange={handleAllCheck}
+                    onChange={handleAllCheck}
                   />
                   <Typography
                     variant="subtitle1"

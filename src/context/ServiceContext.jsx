@@ -35,6 +35,8 @@ const  ServiceContext = (props) => {
     const [ bronzeList, setBronzeList ] = useState(initialState)
 
     const [isAllCheck, setIsAllCheck] = useState(false)
+    const [isChecked, setIsChecked] = useState(false)
+ 
 
     
   const [userLabel, setUserLabel] = useState("Bronze");
@@ -139,6 +141,84 @@ console.log(uniqueID);
        
       },[bronzeData, silverData, goldData, platinumData, userLabel])
 
+      console.log("isAllCheck", isAllCheck);
+
+      const handleSelectAllClick = useCallback(
+        (event) => {
+          const { checked } = event.target;
+    
+          console.log("worked");
+    
+          const updatedCheckboxes = bronzeData.map((checkbox) => ({
+            ...checkbox,
+            retails_short: true ,
+            retails_long : true,
+            corporate_short : true,
+            corporate_long : true
+          }));
+    
+          setBronzeData(updatedCheckboxes);
+       
+       
+        },
+        [ bronzeData, ]
+      );
+
+      const handleAllCheck = useCallback(() => {
+         if( userLabel === "Bronze"){
+          const updatedCheckboxes = bronzeData.map((checkbox) => ({
+            ...checkbox,
+            retails_short: !isChecked ,
+            retails_long : !isChecked,
+            corporate_short : !isChecked,
+            corporate_long : !isChecked
+          }));
+    
+          setBronzeData(updatedCheckboxes);
+          setIsAllCheck(!isAllCheck) 
+          setIsChecked(!isChecked)
+         } else if(userLabel === "Silver" ){
+          const updatedCheckboxes = silverData.map((checkbox) => ({
+            ...checkbox,
+            retails_short: !isChecked ,
+            retails_long : !isChecked,
+            corporate_short : !isChecked,
+            corporate_long : !isChecked
+          }));
+    
+          setSilverData(updatedCheckboxes);
+          setIsAllCheck(!isAllCheck) 
+          setIsChecked(!isChecked)
+
+         }else if(userLabel === "Gold" ){
+          const updatedCheckboxes = goldData.map((checkbox) => ({
+            ...checkbox,
+            retails_short: !isChecked ,
+            retails_long : !isChecked,
+            corporate_short : !isChecked,
+            corporate_long : !isChecked
+          }));
+    
+          setGoldData(updatedCheckboxes);
+          setIsAllCheck(!isAllCheck) 
+          setIsChecked(!isChecked)
+         }else {
+          const updatedCheckboxes = platinumData.map((checkbox) => ({
+            ...checkbox,
+            retails_short: !isChecked ,
+            retails_long : !isChecked,
+            corporate_short : !isChecked,
+            corporate_long : !isChecked
+          }));
+    
+          setPlatinumData(updatedCheckboxes);
+          setIsAllCheck(!isAllCheck) 
+          setIsChecked(!isChecked)
+         }
+      },[isAllCheck, userLabel,bronzeData, silverData, goldData, platinumData, isChecked ])
+
+
+
       // const handleAllCheck = useCallback(() => {
       //   userLabel === "Bronze"
       //    ? setIsAllCheck(!isAllCheck) 
@@ -171,8 +251,9 @@ console.log(uniqueID);
             bronzeList : bronzeList,
             setBronzeList,
             handleAdd : handleAdd,
-            // handleAllCheck : handleAllCheck,
+            handleAllCheck : handleAllCheck,
             isAllCheck : isAllCheck,
+            isChecked : isChecked,
           
 
             handleChangeTabs : handleChangeTabs,

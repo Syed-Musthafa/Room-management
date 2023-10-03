@@ -4,12 +4,16 @@ import Service from "./components/Service";
 import Amenities from "./components/Amenities";
 import ServiceContext from "../../context/ServiceContext";
 import AmentiesContext from "../../context/AmentiesContext";
+import { useContext } from "react";
+import { RoomContextProv } from "../../context/RoomContext";
 
 // CustomTabPanel.propTypes = {
 //   children: PropTypes.node,
 //   index: PropTypes.number.isRequired,
 //   value: PropTypes.number.isRequired,
 // };
+
+
 
 function a11yProps(index) {
   return {
@@ -19,15 +23,11 @@ function a11yProps(index) {
 }
 
 const RoomManagement = () => {
-  const [value, setValue] = React.useState(0);
 
-  console.log("value", value);
+  const contextData = useContext(RoomContextProv)
+ const { value, handleChange  } = contextData
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
-  console.log("value", value);
 
   return (
     <Box sx={{ width: "100%", typography: "body1" }}>
