@@ -22,11 +22,6 @@ const Service = (props) => {
     handleClickTabs,
   } = contextData;
 
-  // const [userLabel, setUserLabel] = useState("Bronze");
-  // const [selected, setSelected] = useState([]);
-  // const [list, setList] = useState(0);
-
-  console.log("userLabel", userLabel);
 
   const tabs = [
     {
@@ -55,18 +50,6 @@ const Service = (props) => {
     },
   ];
 
-  // const handleChangeTabs = useCallback((event, newValue) => {
-  //   setList(newValue);
-  //   setSelected([]);
-  // }, []);
-
-  // const handleClickTabs = useCallback(
-  //   (name) => () => {
-  //     setUserLabel(name);
-  //     setSelected([]);
-  //   },
-  //   [userLabel]
-  // );
 
   return (
     <Grid

@@ -61,11 +61,6 @@ const  ServiceContext = (props) => {
 
 // Generate a unique ID 
 const uniqueID = uuidv4();
-
-console.log(uniqueID);
-
-
-
     const handleAdd = useCallback(() => {
 
       if(userLabel === "Bronze") {
@@ -141,28 +136,6 @@ console.log(uniqueID);
        
       },[bronzeData, silverData, goldData, platinumData, userLabel])
 
-      console.log("isAllCheck", isAllCheck);
-
-      const handleSelectAllClick = useCallback(
-        (event) => {
-          const { checked } = event.target;
-    
-          console.log("worked");
-    
-          const updatedCheckboxes = bronzeData.map((checkbox) => ({
-            ...checkbox,
-            retails_short: true ,
-            retails_long : true,
-            corporate_short : true,
-            corporate_long : true
-          }));
-    
-          setBronzeData(updatedCheckboxes);
-       
-       
-        },
-        [ bronzeData, ]
-      );
 
       const handleAllCheck = useCallback(() => {
          if( userLabel === "Bronze"){
@@ -216,19 +189,6 @@ console.log(uniqueID);
           setIsChecked(!isChecked)
          }
       },[isAllCheck, userLabel,bronzeData, silverData, goldData, platinumData, isChecked ])
-
-
-
-      // const handleAllCheck = useCallback(() => {
-      //   userLabel === "Bronze"
-      //    ? setIsAllCheck(!isAllCheck) 
-      //    :  userLabel === "Silver" 
-      //    ? setIsAllCheck(!isAllCheck) 
-      //    :  userLabel === "Gold" 
-      //    ? setIsAllCheck(!isAllCheck) 
-      //    :  setIsAllCheck(!isAllCheck) 
-      // },[isAllCheck, userLabel])
-    
 
 
     return (

@@ -22,8 +22,6 @@ const Bronze = () => {
   const contextData = useContext(AmentiesContextProv);
   const { bronzeData, setBronzeData, isAllCheck } = contextData;
 
-  console.log("bronzeData", bronzeData);
-
   const [newOption, setNewOption] = useState("");
   const [isAddingOption, setIsAddingOption] = useState(false);
   const [selected, setSelected] = useState([]);
@@ -342,8 +340,7 @@ const Bronze = () => {
                       }}
                       checked={item.retails_short}
                       onClick={handleCheckClick("retails_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                    
                     />
                   </TableCell>
                   <TableCell>
@@ -353,11 +350,9 @@ const Bronze = () => {
                         "aria-labelledby": labelId,
                         "aria-label": label,
                       }}
-                      // aria-label={'Value : ' + index}
                       checked={item.retails_long}
                       onClick={handleCheckClick("retails_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                     
                     />
                   </TableCell>
                   <TableCell>
@@ -369,8 +364,7 @@ const Bronze = () => {
                       }}
                       checked={item.corporate_short}
                       onClick={handleCheckClick("corporate_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // // onClick={handleClick(item.bronzeId)}
+                    
                     />
                   </TableCell>
                   <TableCell>
@@ -382,8 +376,7 @@ const Bronze = () => {
                       }}
                       checked={item.corporate_long}
                       onClick={handleCheckClick("corporate_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                      
                     />
                   </TableCell>
                   <TableCell>

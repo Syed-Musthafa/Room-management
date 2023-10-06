@@ -46,27 +46,12 @@ const TableList = ({
   const roomContextData = useContext(RoomContextProv);
   const { value } = roomContextData;
 
-  console.log("value", value);
-
-
-
     const AmentiasContextData = useContext(AmentiesContextProv);
        const { isAllCheck, } = AmentiasContextData;
   
       const contextData = useContext(ServiceContextProv);
       const { isAllCheck : allCheck, } = contextData;
     
- 
-
-
-  
- 
-  
-
-
-
-  console.log("isAllCheck", isAllCheck);
-
   return (
 
 

@@ -60,10 +60,6 @@ const AmentiesContext = (props) => {
 // Generate a unique ID 
 const uniqueID = uuidv4();
 
-console.log(uniqueID);
-
-
-
     const handleAddAmenties = useCallback(() => {
 
       if(userLabel === "Bronze") {

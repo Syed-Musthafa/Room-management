@@ -21,7 +21,6 @@ const Silver = () => {
   const contextData = useContext(ServiceContextProv);
   const { silverData,setSilverData,  isAllCheck } = contextData;
 
-  console.log("silverData", silverData);
 
 
   const [newOption, setNewOption] = useState("");
@@ -71,7 +70,6 @@ const Silver = () => {
   const handleSave = useCallback((index) => (e) => {
     
     const updatedData = [...silverData];
-    // Update the data in updatedData[index] as needed
     setSilverData(updatedData);
     setIsEditing(false);
     
@@ -345,8 +343,7 @@ const Silver = () => {
                       }}
                       checked={item.retails_short}
                       onClick={handleCheckClick("retails_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                     
                     />
                   </TableCell>
                   <TableCell>
@@ -356,11 +353,10 @@ const Silver = () => {
                         "aria-labelledby": labelId,
                         "aria-label": label,
                       }}
-                      // aria-label={'Value : ' + index}
+                      
                       checked={item.retails_long}
                       onClick={handleCheckClick("retails_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                     
                     />
                   </TableCell>
                   <TableCell>
@@ -372,8 +368,7 @@ const Silver = () => {
                       }}
                       checked={item.corporate_short}
                       onClick={handleCheckClick("corporate_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // // onClick={handleClick(item.bronzeId)}
+                   
                     />
                   </TableCell>
                   <TableCell>
@@ -385,8 +380,7 @@ const Silver = () => {
                       }}
                       checked={item.corporate_long}
                       onClick={handleCheckClick("corporate_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                   
                     />
                   </TableCell>
                   <TableCell>

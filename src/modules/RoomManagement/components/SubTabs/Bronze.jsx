@@ -22,9 +22,6 @@ const Bronze = () => {
   const contextData = useContext(ServiceContextProv);
   const { bronzeData , setBronzeData, isAllCheck } = contextData;
 
-  console.log("bronzeData", bronzeData);
-
-
   const [newOption, setNewOption] = useState("");
   const [isAddingOption, setIsAddingOption] = useState(false);
   const [selected, setSelected] = useState([]);
@@ -85,10 +82,6 @@ const Bronze = () => {
 
   const handleServiceEditChange = useCallback((index)=>
   (e) => {
-
-    console.log("index", index);
-    console.log("chneged", e);
-
     const updatedData = [...bronzeData];
     updatedData[index].service = e.target.value;
     setBronzeData(updatedData);
@@ -194,9 +187,6 @@ const enableTextField = useCallback((index) => {
   const handleSelectAllClick = useCallback(
     (event) => {
       const { checked } = event.target;
-
-      console.log("worked");
-
       const updatedCheckboxes = bronzeData.map((checkbox) => ({
         ...checkbox,
         retails_short: true ,
@@ -206,9 +196,7 @@ const enableTextField = useCallback((index) => {
       }));
 
       setBronzeData(updatedCheckboxes);
-      // setMasterCheckBox(checked);
-
-      // setIsSelected(!isSelected);
+    
    
     },
     [masterCheckBox, bronzeData, isSelected, ]
@@ -284,13 +272,7 @@ const enableTextField = useCallback((index) => {
     [corporateLongBox, bronzeData, corporateLongSelected, ]
   );
 
-  // const handleAllCheckBox = () => {
-  //   handleSelectAllClick();
-  //   handleRetailLongClick();
-  //   handleCorporateShortClick();
-  //   handleCorporateLongClick();
-
-  // }
+ 
 
   const handleDelete = useCallback((id) => {
 
@@ -384,8 +366,7 @@ const enableTextField = useCallback((index) => {
                       }}
                       checked={item.retails_short}
                       onClick={handleCheckClick("retails_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                 
                     />
                   </TableCell>
                   <TableCell>
@@ -395,11 +376,9 @@ const enableTextField = useCallback((index) => {
                         "aria-labelledby": labelId,
                         "aria-label": label,
                       }}
-                      // aria-label={'Value : ' + index}
                       checked={item.retails_long}
                       onClick={handleCheckClick("retails_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                      
                     />
                   </TableCell>
                   <TableCell>
@@ -411,8 +390,7 @@ const enableTextField = useCallback((index) => {
                       }}
                       checked={item.corporate_short}
                       onClick={handleCheckClick("corporate_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // // onClick={handleClick(item.bronzeId)}
+                    
                     />
                   </TableCell>
                   <TableCell>
@@ -424,8 +402,7 @@ const enableTextField = useCallback((index) => {
                       }}
                       checked={item.corporate_long}
                       onClick={handleCheckClick("corporate_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                     
                     />
                   </TableCell>
                   <TableCell>

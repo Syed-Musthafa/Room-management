@@ -35,18 +35,11 @@ const UserTabs = ({
   currentTab
 }) => {
 
-  console.log("currentTab", currentTab,currentLabel );
 
   const [value, setValue] = useState(0);
   const [component, setComponent] = useState([]);
 
-  // useEffect(() => {
-  //   if (currentTab) {
-  //     setValue(currentTab);
-  //   } else {
-  //     setValue(0);
-  //   }
-  // }, [currentTab]);
+ 
   useEffect(()=> {
     setValue(currentTab)
   },[currentTab,value])
@@ -98,8 +91,7 @@ const UserTabs = ({
             tabs.map(
               ({ label, allowedUser, name }, i) =>
               {
-                console.log("allowedUser", allowedUser)
-
+              
                return  (
                  
                   <Tab

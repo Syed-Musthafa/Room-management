@@ -34,7 +34,6 @@ function CustomDropdown({
 
   ...selectProps
 }) {
-  console.log("options", options);
 
   return (
     <div>

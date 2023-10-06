@@ -26,8 +26,6 @@ const Amenities = (props) => {
     handleClickTabs,
   } = contextData;
 
-  console.log("userLabel", userLabel);
-
   const tabs = [
     {
       label: "Bronze",

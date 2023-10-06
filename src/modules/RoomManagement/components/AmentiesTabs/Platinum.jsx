@@ -26,9 +26,6 @@ const Platinum = () => {
   const contextData = useContext(AmentiesContextProv);
   const { platinumData,setPlatinumData, isAllCheck } = contextData;
 
-  console.log("platinumData", platinumData);
-
-
   const [newOption, setNewOption] = useState("");
   const [isAddingOption, setIsAddingOption] = useState(false);
   const [selected, setSelected] = useState([]);
@@ -350,8 +347,7 @@ const Platinum = () => {
                       }}
                       checked={item.retails_short}
                       onClick={handleCheckClick("retails_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                     
                     />
                   </TableCell>
                   <TableCell>
@@ -364,8 +360,7 @@ const Platinum = () => {
                       // aria-label={'Value : ' + index}
                       checked={item.retails_long}
                       onClick={handleCheckClick("retails_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                   
                     />
                   </TableCell>
                   <TableCell>
@@ -377,8 +372,7 @@ const Platinum = () => {
                       }}
                       checked={item.corporate_short}
                       onClick={handleCheckClick("corporate_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // // onClick={handleClick(item.bronzeId)}
+                   
                     />
                   </TableCell>
                   <TableCell>
@@ -390,8 +384,7 @@ const Platinum = () => {
                       }}
                       checked={item.corporate_long}
                       onClick={handleCheckClick("corporate_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                     
                     />
                   </TableCell>
                   <TableCell>

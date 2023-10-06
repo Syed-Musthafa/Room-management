@@ -23,7 +23,6 @@ const Gold = () => {
   const contextData = useContext(ServiceContextProv);
   const { goldData,setGoldData, isAllCheck } = contextData;
 
-  console.log("goldData", goldData);
 
 
   const [newOption, setNewOption] = useState("");
@@ -347,8 +346,7 @@ const Gold = () => {
                       }}
                       checked={item.retails_short}
                       onClick={handleCheckClick("retails_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                   
                     />
                   </TableCell>
                   <TableCell>
@@ -358,11 +356,9 @@ const Gold = () => {
                         "aria-labelledby": labelId,
                         "aria-label": label,
                       }}
-                      // aria-label={'Value : ' + index}
                       checked={item.retails_long}
                       onClick={handleCheckClick("retails_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                   
                     />
                   </TableCell>
                   <TableCell>
@@ -374,8 +370,7 @@ const Gold = () => {
                       }}
                       checked={item.corporate_short}
                       onClick={handleCheckClick("corporate_short", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // // onClick={handleClick(item.bronzeId)}
+                      
                     />
                   </TableCell>
                   <TableCell>
@@ -387,8 +382,7 @@ const Gold = () => {
                       }}
                       checked={item.corporate_long}
                       onClick={handleCheckClick("corporate_long", index)}
-                      // checked={selected.includes(item.bronzeId)}
-                      // onClick={handleClick(item.bronzeId)}
+                      
                     />
                   </TableCell>
                   <TableCell>
